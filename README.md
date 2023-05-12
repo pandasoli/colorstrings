@@ -101,10 +101,8 @@ It returns an error if:
 
 <br/>
 
-### `Append(str ColorString, position uint) error`
-> Append another string inside the current one
-
-This returns an error if `position` is bigger than the string.
+### `Append(strs ...ColorString)`
+> Append another string at the end of the main one
 
 <br/>
 
@@ -120,6 +118,23 @@ This is gonna return an error if `position` is bigger than the string.
 
 This is gonna return an error if the `str` is bigger the current string,  
 or the `position` + the `str`'s length is bigger than the current string.
+
+<br/>
+
+### `AppendAt(str ColorString, position uint) error`
+> Append another string inside the main one at the told position
+
+This returns an error if `position` is bigger than the string.
+
+<br/>
+
+### `Clear()`
+> Clear the string and the colors
+
+<br/>
+
+### `SplitString(at string) (res []ColorString, pos []uint)`
+> Split the main string based on the piece of string passed and returns the parts where the piece was in the middle, and the positions where pieces were found
 
 <br/>
 <div align='right'>
