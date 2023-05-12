@@ -10,8 +10,14 @@ func (self *ColorString) Connect(str ColorString, position uint) error {
     return fmt.Errorf("Cannot connect outside the string")
   }
 
-  self.Remove(position, uint(len(str.string_)))
-  self.Append(str, position)
+  left, _ := self.Substring(0, position)
+  right, _ := self.Substring(position, uint(len(self.string_)) - position - uint(len(str.string_)))
+
+  self.Clear()
+
+  self.Append(left)
+  self.Append(str)
+  self.Append(right)
 
   return nil
 }
