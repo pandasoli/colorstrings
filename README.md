@@ -2,7 +2,7 @@
 
 # [Color String](https://github.com/pandasoli/colorstring) <img width='32' src='https://raw.githubusercontent.com/egonelbre/gophers/master/icon/emoji/gopher-blushing.png' alt='Gopher icon'/>
 
-This lib is usable for console (terminal) applications when you need to manage strings with color codes inside.
+This lib is usable for console (terminal) apps when you need to manage strings with color codes.
 
 I also have [goterm](https://github.com/pandasoli/goterm) that is a functions pack for console apps.  
 Also I recommend you to use [Guffers](https://github.com/pandasoli/guffers) for a more complex CLI development.
@@ -12,10 +12,44 @@ Also I recommend you to use [Guffers](https://github.com/pandasoli/guffers) for 
 
 ## Why colorstrings? <img width='27' src='https://raw.githubusercontent.com/egonelbre/gophers/master/icon/emoji/gopher-thinking.png' alt='Gopher icon'/>
 
-You know when you try to add a color to a string and it gets the wrong position because there was more colors before this position and you didn't sum their size with the position? Well...
+I prefer to show you...
 
-In this library the string and its colors are separated and then joined when you need.  
-You don't have to know how much colors came before it or even their size, just say the position we want to put it at!
+The problem it fixes:
+
+```go
+// Putting a \033[0m after 'hi'
+
+/* --- Without colorstrings --- */
+
+str := " \033[31mHey \033[1mhi! "
+str = str[:7] + "\033[0m" + str[7:]   // ✗ ' \e[31mH\e[0mey \e[1mhi! '
+str = str[:16] + "\033[0m" + str[16:] // ✔ ' \e[31mHey \e[1mhi\e[0m! '
+
+
+/* --- With colorstrings --- */
+
+str, _ := NewColorString(" \033[31mHey \033[1mhi! ")
+str.Colorize("0", 7)
+str.Join() // Get the result
+
+// ✔ ' \e[31mHey \e[1mhi\e[0m! '
+```
+
+What is the problem, and how it fixes it:
+
+```go
+/*
+ * in a pure string:
+ *   ' Hey hi! '
+ *           ^ 7
+ *
+ * in a colored string:
+ *   ' \033[31mHey \033[1mhi! '
+ *           ^ 7            ^ 16
+ *
+ * Colorstrings keep the positions.
+ */
+```
 
 <br/>
 <div align='right'>
@@ -32,6 +66,11 @@ And put this in your code:
 ```go
 import . "github.com/pandasoli/colorstrings"
 ```
+
+<br/>
+<br/>
+
+BTW: If you miss some features, please make an issue and I'll reply you as soon as possible.
 
 <br/>
 
@@ -78,8 +117,8 @@ The lib is gonna make the last one the only one: `\033[94m`.
 ## Features <img width='27' src='https://raw.githubusercontent.com/egonelbre/gophers/master/icon/emoji/gopher-smiling-blushing.png' alt='Gopher icon'/>
 
 ### `Colorize(str_fields string, position uint) error`
-> Add a new color to the string at the `position`  
-> Ex: `str.Colorize("1;38;5;200", 2)`
+> /* Add a new color to the string at the `position`  
+> Ex: `str.Colorize("1;38;5;200", 2)` */
 
 It returns an error if:
 - the `position` is bigger than the string
@@ -92,29 +131,29 @@ It returns an error if:
 <br/>
 
 ### `Join() string`
-> Join the string with its colors
+> // Join the string with its colors
 
 <br/>
 
 ### `Substring(position, length uint) (res ColorString, err error)`
-> Cut the string from the `position` to `position + length`
+> // Cut the string from the `position` to `position + length`
 
 <br/>
 
 ### `Append(strs ...ColorString)`
-> Append another string at the end of the main one
+> // Append another string at the end of the main one
 
 <br/>
 
 ### `Remove(position, length uint) error`
-> Remove a piece of the string
+> // Remove a piece of the string
 
 This is gonna return an error if `position` is bigger than the string.
 
 <br/>
 
 ### `Connect(str ColorString, position uint) error`
-> Replaces from the `position` to the length of the `str` with the `str`
+> // Replaces from the `position` to the length of the `str` with the `str`
 
 This is gonna return an error if the `str` is bigger the current string,  
 or the `position` + the `str`'s length is bigger than the current string.
@@ -122,19 +161,21 @@ or the `position` + the `str`'s length is bigger than the current string.
 <br/>
 
 ### `AppendAt(str ColorString, position uint) error`
-> Append another string inside the main one at the told position
+> // Append another string inside the main one at the told position
 
 This returns an error if `position` is bigger than the string.
 
 <br/>
 
 ### `Clear()`
-> Clear the string and the colors
+> // Clear the string and the colors
 
 <br/>
 
-### `SplitString(at string) (res []ColorString, pos []uint)`
-> Split the main string based on the piece of string passed and returns the parts where the piece was in the middle, and the positions where pieces were found
+### `SplitString(at string) (res []colorstring, pos []uint)`
+> /* Split the main string based on the piece of string passed and returns  
+> the parts where the piece was in the middle, and  
+> the positions where pieces were found */
 
 <br/>
 <div align='right'>
@@ -142,4 +183,5 @@ This returns an error if `position` is bigger than the string.
 ## <img width='27' src='https://raw.githubusercontent.com/egonelbre/gophers/master/icon/emoji/gopher-wink.png' alt='Gopher icon'/> Credits
 </div>
 
-Gopher icons by [Egon Elbre](https://github.com/egonelbre/gophers) <img width='20' src='https://raw.githubusercontent.com/egonelbre/gophers/master/icon/emoji/gopher-mind-blown.png' alt='Gopher icon'/>
+Gopher icons by [Egon Elbre](https://github.com/egonelbre/gophers) <img width='20' src='https://raw.githubusercontent.com/egonelbre/gophers/master/icon/emoji/gopher-mind-blown.png' alt='Gopher icon'/>  
+Look at the [Dev Notes](./.docs/dev-notes.md) if you would like to contribute! <img width='20' src='https://raw.githubusercontent.com/egonelbre/gophers/master/icon/emoji/gopher-pirate.png' alt='Gopher icon'/>
