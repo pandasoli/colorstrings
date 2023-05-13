@@ -6,8 +6,8 @@ import (
 
 
 func NewEightBitColor(fields []Field) (res EightBitColor) {
-  ground := fields[0].GetValue()
-  color := fields[2].GetValue()
+  ground := fields[0].Value
+  color := fields[2].Value
 
   res.ground = (ground - 8) / 10
   res.color = color

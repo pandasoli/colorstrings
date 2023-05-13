@@ -17,6 +17,6 @@ func Test_Clear(t *testing.T) {
 
   str.Clear()
 
-  assert.Equal("", str.string_)
-  assert.Equal([]Color {}, str.colors)
+  assert.Equal("", str.String)
+  assert.Equal([]Color {}, str.Colors)
 }

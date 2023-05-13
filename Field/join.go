@@ -7,7 +7,7 @@ import (
 
 
 func (self Field) Join() string {
-  all := append([]uint8{ self.value }, self.props...)
+  all := append([]uint8{ self.Value }, self.Props...)
   var str_all []string
 
   for _, item := range all {

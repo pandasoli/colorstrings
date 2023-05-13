@@ -7,7 +7,7 @@ func NewColorString(str string) (result ColorString, err error) {
   re := regexp.MustCompile(`\033\[[\w\;]+m`)
   matches := re.FindAllStringIndex(str, -1)
 
-  result.string_ = re.ReplaceAllString(str, "")
+  result.String = re.ReplaceAllString(str, "")
 
   var colors_w int
   for _, pos := range matches {

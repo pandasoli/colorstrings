@@ -6,7 +6,7 @@ import (
 
 
 func NewTwoBitColor(field Field) (res TwoBitColor) {
-  value := field.GetValue()
+  value := field.Value
 
   if valid_foreground(value) {
     res.ground = 3

@@ -6,6 +6,6 @@ import (
 
 
 func (self *ColorString) Clear() {
-  self.string_ = ""
-  self.colors = []Color {}
+  self.String = ""
+  self.Colors = []Color {}
 }

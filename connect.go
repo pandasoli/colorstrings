@@ -4,14 +4,14 @@ import "fmt"
 
 
 func (self *ColorString) Connect(str ColorString, position uint) error {
-  if int(position) > len(self.string_) {
+  if int(position) > len(self.String) {
     return fmt.Errorf("Cannot connect at a position after the string's end")
-  } else if int(position) + len(str.string_) > len(self.string_) {
+  } else if int(position) + len(str.String) > len(self.String) {
     return fmt.Errorf("Cannot connect outside the string")
   }
 
   left, _ := self.Substring(0, position)
-  right, _ := self.Substring(position, uint(len(self.string_)) - position - uint(len(str.string_)))
+  right, _ := self.Substring(position, uint(len(self.String)) - position - uint(len(str.String)))
 
   self.Clear()
 

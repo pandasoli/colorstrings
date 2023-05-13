@@ -6,7 +6,7 @@ import (
 
 
 func NewFourBitColor(field Field) (res FourBitColor) {
-  value := field.GetValue()
+  value := field.Value
 
   if valid_foreground(value) {
     res.ground = 9

@@ -9,8 +9,8 @@ import (
 
 
 func TryTwoBitColor(field Field) errors.Error {
-  value := field.GetValue()
-  props := field.GetProps()
+  value := field.Value
+  props := field.Props
 
   if !valid_foreground(value) && !valid_background(value) {
     msg := fmt.Sprintf("%d is not a valid 2-bit color", value)

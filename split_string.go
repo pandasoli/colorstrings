@@ -4,7 +4,7 @@ import . "github.com/pandasoli/colorstrings/utils"
 
 
 func (self ColorString) SplitString(at string) (res []ColorString, pos []uint) {
-  for _, raw_part := range Split(self.string_, at) {
+  for _, raw_part := range Split(self.String, at) {
     part, _ := self.Substring(
       raw_part.Pos,
       uint(len(raw_part.String)),

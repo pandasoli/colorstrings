@@ -16,8 +16,8 @@ import (
 
 
 func (self *ColorString) Colorize(str_fields string, position uint) error {
-  if len(self.string_) < int(position) {
-    msg := fmt.Sprintf("Cannot colorize after the string's end (%d < %d)", len(self.string_), position)
+  if len(self.String) < int(position) {
+    msg := fmt.Sprintf("Cannot colorize after the string's end (%d < %d)", len(self.String), position)
     return fmt.Errorf(msg)
   }
 
@@ -47,8 +47,8 @@ func (self *ColorString) Colorize(str_fields string, position uint) error {
   for i := 0; i < len(fields); i++ {
     field := fields[i]
 
-    if 107 < field.GetValue() {
-      msg := fmt.Sprintf("A field non-RGB cannot be bigger than 107 (%d)", field.GetValue())
+    if 107 < field.Value {
+      msg := fmt.Sprintf("A field non-RGB cannot be bigger than 107 (%d)", field.Value)
       return fmt.Errorf(msg)
     }
 
@@ -108,10 +108,10 @@ func (self *ColorString) Colorize(str_fields string, position uint) error {
   var new_i int
   var found_new_i bool
 
-  for i, old_color := range self.colors {
+  for i, old_color := range self.Colors {
     if old_color.Position == expr.Position {
       found_new_i = true
-      self.colors[i].Sum(expr)
+      self.Colors[i].Sum(expr)
     }
 
     if old_color.Position >= expr.Position {
@@ -122,11 +122,11 @@ func (self *ColorString) Colorize(str_fields string, position uint) error {
   }
 
   if !found_new_i {
-    self.colors = append(
-      self.colors[:new_i],
+    self.Colors = append(
+      self.Colors[:new_i],
       append(
         []Color { expr },
-        self.colors[new_i:]...,
+        self.Colors[new_i:]...,
       )...,
     )
   }

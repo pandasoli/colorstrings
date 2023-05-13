@@ -6,9 +6,6 @@ import (
 
 
 type ColorString struct {
-  string_ string
-  colors []Color
+  String string
+  Colors []Color
 }
-
-func (self ColorString) GetString() string { return self.string_ }
-func (self ColorString) GetColor() []Color { return self.colors }

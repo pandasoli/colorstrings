@@ -12,9 +12,9 @@ func MakeField(str_field string) (res Field, err error) {
     if err != nil { return res, err }
 
     if i == 0 {
-      res.value = uint8(iprop)
+      res.Value = uint8(iprop)
     } else {
-      res.props = append(res.props, uint8(iprop))
+      res.Props = append(res.Props, uint8(iprop))
     }
   }
 

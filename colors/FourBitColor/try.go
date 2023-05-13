@@ -9,8 +9,8 @@ import (
 
 
 func TryFourBitColor(field Field) errors.Error {
-  value := field.GetValue()
-  props := field.GetProps()
+  value := field.Value
+  props := field.Props
 
   if !valid_foreground(value) && !valid_background(value) {
     msg := fmt.Sprintf("%d is not a valid 4-bit color", value)
