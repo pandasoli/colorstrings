@@ -4,7 +4,7 @@ import "regexp"
 
 
 func NewColorString(str string) (result ColorString, err error) {
-  re := regexp.MustCompile(`\033\[[\w\;]+m`)
+  re := regexp.MustCompile(`\033\[[\w\;]+?m`)
   matches := re.FindAllStringIndex(str, -1)
 
   result.String = re.ReplaceAllString(str, "")
